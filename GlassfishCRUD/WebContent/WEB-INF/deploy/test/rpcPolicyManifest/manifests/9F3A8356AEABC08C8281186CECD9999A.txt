@@ -1,0 +1,2 @@
+serviceClass: com.glassfish.test.client.GreetingService
+path: CF7D662F6CDF5BB91E54C3D685F05798.gwt.rpc

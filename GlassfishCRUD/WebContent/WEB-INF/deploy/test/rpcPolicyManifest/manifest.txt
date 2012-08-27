@@ -1,0 +1,3 @@
+# Module test
+# RPC service class, partial path of RPC policy file
+com.glassfish.test.client.GreetingService, CF7D662F6CDF5BB91E54C3D685F05798.gwt.rpc

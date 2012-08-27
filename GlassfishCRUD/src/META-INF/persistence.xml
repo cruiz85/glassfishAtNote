@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="1.0"
+	xmlns="http://java.sun.com/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_1_0.xsd">
+	<persistence-unit name="System" transaction-type="JTA">
+        <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+        <jta-data-source>jdbc/prueba</jta-data-source>
+        <class>com.glassfish.test.client.Template</class>
+        <properties>
+        <!--    <property name="eclipselink.target-server" value="SunAS9"/>/  se comentó-->
+            <!-- property name="eclipselink.target-database" 
+                      value="org.eclipse.persistence.platform.database.DerbyPlatform"/-->
+            <property name="eclipselink.logging.level" value="FINEST"/>
+            <!-- turn off DDL generation after the model is stable -->            
+          <!--     <property name="eclipselink.ddl-generation" value="drop-and-create-tables"/>  se comentó-->
+         <!--      <property name="eclipselink.ddl-generation.output-mode" value="database"/>  se comentó-->
+        </properties>
+    </persistence-unit>
+	
+</persistence>
