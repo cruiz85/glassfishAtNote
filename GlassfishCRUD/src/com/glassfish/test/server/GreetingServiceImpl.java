@@ -7,6 +7,7 @@ import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 import javax.persistence.PersistenceContext;
 
+
 import com.glassfish.test.client.GreetingService;
 import com.glassfish.test.client.Template;
 import com.glassfish.test.shared.FieldVerifier;
@@ -20,30 +21,51 @@ import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 public class GreetingServiceImpl extends RemoteServiceServlet implements
 		GreetingService {
 
-	private EntityManagerFactory emf;
+
 	private EntityManager em;
 	private String PERSISTENCE_UNIT_NAME = "System";
-		
+	private EntityManagerFactory emf = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT_NAME);
+	
 	
 	public void saveTemplate(Template template) {
-		emf = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT_NAME);
-		em = emf.createEntityManager();
+		EntityManager entityManager = emf.createEntityManager();
+		EntityTransaction entityTransaction = entityManager.getTransaction();
 
-		em.getTransaction().begin();
+		entityTransaction.begin();
+		if (template.getId() == null) {
+			entityManager.persist(template);
+			entityManager.flush();
+		} else {
 
+			entityManager.merge(template);
+			entityManager.flush();
+		}
 		
-		em.persist(template);
+		entityTransaction.commit();
+		entityManager.close();
 
-		em.getTransaction().commit();
-		em.close();
-	    emf.close();
-//		Template T=loadTemplateById(template.getId());
 
 	}
+//	
+//	public void saveTemplate(Template template) {
+//		emf =  Persistence.createEntityManagerFactory(PERSISTENCE_UNIT_NAME);
+//		em = emf.createEntityManager();
+//
+//		em.getTransaction().begin();
+//
+//		
+//		em.persist(template);
+//
+//		em.getTransaction().commit();
+//		em.close();
+//	    emf.close();
+//
+//
+//	}
 	public String greetServer(String input) throws IllegalArgumentException {
 		
 		
-		Template template = new Template("joaquin");
+		Template template = new Template("cesan");
 		saveTemplate(template);
 		// Verify that the input is valid. 
 		if (!FieldVerifier.isValidName(input)) {
